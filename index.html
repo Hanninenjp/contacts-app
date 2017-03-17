@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contacts App</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script type="text/javascript" charset="utf-8" src="scripts.js"></script>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>Ekoodi</h1>
+        <h2>Contacts app</h2>
+    </header>
+
+    <main>
+
+        <!-- Contact form -->
+
+        <form name="contactForm" id="contactForm">
+            <fieldset name="contactFields">
+                <legend name="contactLegend" id="contactLegend">New contact</legend>
+                <p>First name:</p>
+                <input type="text" name="contactFirstName" id="contactFirstName" value="" required><br>
+                <p>Last name:</p>
+                <input type="text" name="contactLastName" id="contactLastName" value="" required><br>
+                <p>Phone:</p>
+                <input type="text" name="contactPhone" id="contactPhone" value="" required><br>
+                <p>Street address:<p/>
+                <input type="text" name="contactAddress" id="contactAddress" value="" required><br>
+                <p>City:</p>
+                <input type="text" name="contactCity" id="contactCity" value="" required><br><br>
+                <input type="submit" id="contactFormActionButton" value="Create">
+            </fieldset>
+        </form>
+
+        <!-- Contacts table -->
+
+        <table name="contactTable" id="contactTable">
+            <caption>Contacts</caption>
+            <thead name="contactTableHead" id="contactTableHead">
+            <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th class="tableButtonHead">Edit</th>
+                <th class="tableButtonHead">Delete</th>
+            </tr>
+            </thead>
+            <tbody name="contactTableBody" id="contactTableBody">
+            </tbody>
+        </table>
+
+        <!-- Clear button for development time purposes -->
+
+        <br><input type="button" class="tableClearButton" value="Clear storage" onclick="clearStorage()"><br>
+
+        <div class="note">
+            <p><strong>Clear storage is included for testing purposes.</strong></p>
+            <p><em>Refresh the page after clearing.</em></p>
+        </div>
+
+    </main>
+
+    <footer>
+        <small class="copyright">&copy; Copyright 2017 Jukka Hänninen</small>
+    </footer>
+
+</div>
+
+</body>
+</html>
