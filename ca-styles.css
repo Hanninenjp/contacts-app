@@ -72,6 +72,15 @@ input {
 table {
     width: 100%;
     height: auto;
+    border-collapse:collapse;
+}
+
+table td + td {
+    border-left: 1px solid #ddd;
+}
+
+table th + th {
+    border-left: 1px solid #ddd;
 }
 
 caption {

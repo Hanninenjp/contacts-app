@@ -1,2 +1,0 @@
-//Define namespace
-var contactsApp = {};

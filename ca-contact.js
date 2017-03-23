@@ -3,6 +3,7 @@
  */
 
 contactsApp.contact = function (firstName, lastName, phone, streetAddress, city){
+
     return {
         firstName: firstName,
         lastName: lastName,
@@ -10,4 +11,5 @@ contactsApp.contact = function (firstName, lastName, phone, streetAddress, city)
         streetAddress: streetAddress,
         city: city
     };
+
 };

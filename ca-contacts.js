@@ -38,4 +38,5 @@ contactsApp.contacts = (function () {
             contacts = contactsApp.contactStore.loadContacts();
         }
     };
+
 })();

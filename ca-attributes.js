@@ -14,4 +14,5 @@ contactsApp.attributes = (function () {
             canDelete = value;
         }
     };
+
 })();
