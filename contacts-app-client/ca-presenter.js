@@ -7,10 +7,12 @@ contactsApp.presenter = (function () {
     window.addEventListener("load", initContactsApp);
 
     function initContactsApp(){
-        contactsApp.contacts.loadContacts();
-        var contacts = contactsApp.contacts.getContacts();
-        contactsApp.contactTableView.updateTable(contacts);
+        contactsApp.contacts.loadContacts(contactsUpdated);
         contactsApp.contactFormView.setCreateMode();
+    }
+
+    function contactsUpdated(contacts){
+        contactsApp.contactTableView.updateTable(contacts);
     }
 
     return{
@@ -19,9 +21,7 @@ contactsApp.presenter = (function () {
                 return false;
             }
             var contact = contactsApp.contactFormView.getContact();
-            contactsApp.contacts.createContact(contact);
-            var contacts = contactsApp.contacts.getContacts();
-            contactsApp.contactTableView.updateTable(contacts);
+            contactsApp.contacts.createContact(contact, contactsUpdated);
             contactsApp.contactFormView.resetForm();
             return false;
         },
@@ -37,19 +37,15 @@ contactsApp.presenter = (function () {
                 return false;
             }
             var contact = contactsApp.contactFormView.getContact();
-            contactsApp.contacts.updateContact(contact, index);
-            var contacts = contactsApp.contacts.getContacts();
-            contactsApp.contactTableView.updateTable(contacts);
             contactsApp.contactFormView.resetForm();
             contactsApp.contactFormView.setCreateMode();
+            contactsApp.contacts.updateContact(contact, index, contactsUpdated);
             contactsApp.attributes.setCanDelete(true);
             return false;
         },
         deleteContact: function (index) {
             if(contactsApp.attributes.isCanDelete()){
-                contactsApp.contacts.deleteContact(index);
-                var contacts = contactsApp.contacts.getContacts();
-                contactsApp.contactTableView.updateTable(contacts);
+                contactsApp.contacts.deleteContact(index, contactsUpdated);
                 return false;
             }
             else{

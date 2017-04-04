@@ -1,0 +1,13 @@
+#ca-contact-table-mdl-container{
+    width: fit-content;
+}
+
+#ca-contact-table{
+    width: 100%;
+    border-collapse: collapse;
+    border: none;
+}
+
+.ca-contact-table-button{
+    width: 86px;
+}
