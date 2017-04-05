@@ -1,8 +1,8 @@
+<!--
 <h3>ContactListItemComponent</h3>
+-->
 
-<br>
-
-<md-card style="padding: 0px; width: 400px;">
+<md-card style="padding: 0px 0px 16px 0px; margin: 16px 0px 16px 0px; width: 400px;">
 
   <md-card-header style="background: #3f51b5; height: 60px;">
     <!--
@@ -21,10 +21,10 @@
     <button md-icon-button color="primary">
       <md-icon class="md-24">delete</md-icon>
     </button>
-    <button md-icon-button color="primary">
+    <button md-icon-button color="primary" (click)="contactDialog()">
       <md-icon class="md-24">edit</md-icon>
     </button>
-    <button md-icon-button color="primary" style="float: right;">
+    <button md-icon-button color="primary" style="float: right;" (click)="mapDialog()">
       <md-icon class="md-24">place</md-icon>
     </button>
 
@@ -37,5 +37,3 @@
   -->
 
 </md-card>
-
-<br>

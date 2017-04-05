@@ -1,4 +1,59 @@
+<!--
 <h2>ContactListComponent</h2>
-<div *ngFor="let contact of contacts">
-  <app-contact-list-item [contact]="contact"></app-contact-list-item>
-</div>
+-->
+
+<md-card style="padding: 0px 0px 16px 0px; width: fit-content; height: auto;">
+
+  <md-card-header style="background: #3f51b5; height: 60px">
+
+    <md-card-title><h1 style="color: rgba(255,255,255,.87); line-height: 60px; margin: 0px;">Contacts</h1></md-card-title>
+
+  </md-card-header>
+
+  <md-card-content style="padding: 0px 10px;">
+
+    <div *ngFor="let contact of contacts">
+      <app-contact-list-item [contact]="contact"></app-contact-list-item>
+    </div>
+
+  </md-card-content>
+
+  <!-- Consider and add proper styling for the elements!!! -->
+
+  <md-card-actions align="end" style="padding: 0px; margin: 16px 16px;">
+
+    <button md-fab color="accent" (click)="createContact()">
+      <md-icon class="md-48">add</md-icon>
+    </button>
+    <!--
+    <button md-icon-button color="primary">
+      <md-icon class="md-24">delete</md-icon>
+    </button>
+    -->
+
+  </md-card-actions>
+
+  <!--
+
+  <md-card-actions align="start" style="padding: 0px 16px;">
+
+  <button md-icon-button color="primary">
+    <md-icon class="md-24">delete</md-icon>
+  </button>
+  <button md-icon-button color="primary" (click)="contactDialog()">
+    <md-icon class="md-24">edit</md-icon>
+  </button>
+  <button md-icon-button color="primary" style="float: right;" (click)="mapDialog()">
+    <md-icon class="md-24">place</md-icon>
+  </button>
+
+    </md-card-actions>
+  -->
+
+  <!--
+  <md-card-footer>
+    Footer
+  </md-card-footer>
+  -->
+
+</md-card>

@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Contact} from "../contact";
+import {DialogService} from "../services/dialog.service";
 
 @Component({
   selector: 'app-contact-list-item',
@@ -10,7 +11,17 @@ export class ContactListItemComponent implements OnInit {
 
   @Input() contact: Contact;
 
-  constructor() { }
+  constructor(private dialogService: DialogService) { }
+
+  //This will be the edit dialog
+  //Pass contact to the dialog, dialog should return edited contact, which is passed to the parent
+  contactDialog(){
+    this.dialogService.contactDialog();
+  }
+
+  mapDialog(){
+    this.dialogService.mapDialog();
+  }
 
   ngOnInit() {
   }

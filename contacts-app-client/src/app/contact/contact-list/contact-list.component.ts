@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Contact} from "../contact";
+import {DialogService} from "../services/dialog.service";
 
 @Component({
   selector: 'app-contact-list',
@@ -10,7 +11,11 @@ export class ContactListComponent implements OnInit {
 
   @Input() contacts: Contact[];
 
-  constructor() { }
+  constructor(public dialogService: DialogService) { }
+
+  public createContact(){
+    this.dialogService.contactDialog();
+  }
 
   ngOnInit() {
   }
