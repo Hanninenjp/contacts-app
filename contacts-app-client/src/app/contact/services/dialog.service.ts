@@ -3,17 +3,25 @@ import {MdDialog} from "@angular/material";
 import {Contact} from "../contact";
 import {ContactDialogComponent} from "../dialogs/contact-dialog/contact-dialog.component";
 import {MapDialogComponent} from "../dialogs/map-dialog/map-dialog.component";
+import {Observable} from "rxjs";
 
 @Injectable()
 export class DialogService {
 
   constructor(private dialog: MdDialog) { }
 
-  public contactDialog(contact?: Contact){
+  public createContactDialog(): Observable<Contact>{
     let dialogRef = this.dialog.open(ContactDialogComponent);
-    //Pass contact to the dialog
-    //Pass create/edit string to the dialog
-    //dialogRef.componentInstance.contact = contact;
+    dialogRef.componentInstance.contact = new Contact();
+    dialogRef.componentInstance.action = "Create";
+    return dialogRef.afterClosed();
+  }
+
+  public editContactDialog(/*pass contact*/) /*return Observable<Contact>*/ {
+    let dialogRef = this.dialog.open(ContactDialogComponent);
+    //Pass contact!
+    dialogRef.componentInstance.contact = new Contact();
+    dialogRef.componentInstance.action = "Edit";
     return dialogRef.afterClosed();
   }
 
@@ -21,19 +29,5 @@ export class DialogService {
     let dialogRef = this.dialog.open(MapDialogComponent);
     //Pass address string to the dialog
     return dialogRef.afterClosed();
-
-    /*
-    //Get return value
-    //Perhaps this should be handled by the service user
-     dialog.afterClosed()
-     .subscribe(selection => {
-     if (selection) {
-     this.selected = selection;
-     } else {
-     // User clicked 'Cancel' or clicked outside the dialog
-     }
-     });
-    */
-
   }
 }

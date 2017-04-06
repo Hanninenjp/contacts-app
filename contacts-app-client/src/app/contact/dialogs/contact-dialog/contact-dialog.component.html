@@ -1,4 +1,34 @@
+<!--
 <div>
   <p>Contact dialog works!</p>
   <button md-raised-button (click)="dialogRef.close()" color="primary">Close</button>
 </div>
+-->
+
+
+<h2>{{action}} contact</h2>
+<form [formGroup]="contactForm" novalidate (ngSubmit)="onSubmit(contactForm)">
+
+  <md-input-container floatPlaceholder="auto">
+    <input mdInput name="firstName" formControlName="firstName" placeholder="First name">
+  </md-input-container>
+  <md-input-container floatPlaceholder="auto">
+    <input mdInput formControlName="lastName" placeholder="Last name">
+  </md-input-container>
+  <md-input-container floatPlaceholder="auto">
+    <input mdInput formControlName="phone" placeholder="Phone">
+  </md-input-container>
+  <md-input-container floatPlaceholder="auto">
+    <input mdInput formControlName="streetAddress" placeholder="Street address">
+  </md-input-container>
+  <md-input-container floatPlaceholder="auto">
+    <input mdInput formControlName="city" placeholder="City">
+  </md-input-container>
+
+  <!-- Validation could be improved, now submit button is simply disabled until form is valid! -->
+  <button md-raised-button type="submit" color="primary" [disabled]="!contactForm.valid">{{action}}</button>
+  <button md-raised-button md-dialog-close color="primary">Cancel</button>
+</form>
+<br>
+<p>Form valid: {{contactForm.valid}}</p>
+<p>Form value: {{contactForm.value | json}}</p>

@@ -18,13 +18,14 @@
   </md-card-content>
 
   <md-card-actions align="start" style="padding: 0px 16px;">
-    <button md-icon-button color="primary">
+
+    <button md-icon-button color="primary" (click)="onDelete()">
       <md-icon class="md-24">delete</md-icon>
     </button>
-    <button md-icon-button color="primary" (click)="contactDialog()">
+    <button md-icon-button color="primary" (click)="onUpdate()">
       <md-icon class="md-24">edit</md-icon>
     </button>
-    <button md-icon-button color="primary" style="float: right;" (click)="mapDialog()">
+    <button md-icon-button color="primary" style="float: right;" (click)="onShowOnMap()">
       <md-icon class="md-24">place</md-icon>
     </button>
 

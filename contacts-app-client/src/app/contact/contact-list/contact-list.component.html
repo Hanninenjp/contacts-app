@@ -13,7 +13,7 @@
   <md-card-content style="padding: 0px 10px;">
 
     <div *ngFor="let contact of contacts">
-      <app-contact-list-item [contact]="contact"></app-contact-list-item>
+      <app-contact-list-item [contact]="contact" (contactUpdate)="onContactUpdate(contact)" (contactDelete)="onContactDelete(contact)" (contactShowOnMap)="onContactShowOnMap(contact)"></app-contact-list-item>
     </div>
 
   </md-card-content>
@@ -22,7 +22,7 @@
 
   <md-card-actions align="end" style="padding: 0px; margin: 16px 16px;">
 
-    <button md-fab color="accent" (click)="createContact()">
+    <button md-fab color="accent" (click)="onContactCreate()">
       <md-icon class="md-48">add</md-icon>
     </button>
     <!--

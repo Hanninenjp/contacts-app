@@ -1,6 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Contact} from "../contact";
-import {DialogService} from "../services/dialog.service";
 
 @Component({
   selector: 'app-contact-list-item',
@@ -10,17 +9,25 @@ import {DialogService} from "../services/dialog.service";
 export class ContactListItemComponent implements OnInit {
 
   @Input() contact: Contact;
+  @Output() contactUpdate = new EventEmitter();
+  @Output() contactDelete = new EventEmitter();
+  @Output() contactShowOnMap = new EventEmitter();
 
-  constructor(private dialogService: DialogService) { }
+  constructor() { }
 
-  //This will be the edit dialog
-  //Pass contact to the dialog, dialog should return edited contact, which is passed to the parent
-  contactDialog(){
-    this.dialogService.contactDialog();
+  onUpdate(){
+    console.log("ContactListItem: onUpdate");
+    this.contactUpdate.emit();
   }
 
-  mapDialog(){
-    this.dialogService.mapDialog();
+  onDelete(){
+    console.log("ContactListItem: onDelete");
+    this.contactDelete.emit();
+  }
+
+  onShowOnMap(){
+    console.log("ContactListItem: onShowOnMap");
+    this.contactShowOnMap.emit();
   }
 
   ngOnInit() {

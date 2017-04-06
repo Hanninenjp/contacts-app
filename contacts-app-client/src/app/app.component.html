@@ -2,4 +2,4 @@
 <h1>AppComponent</h1>
 -->
 
-<app-contact-list [contacts]="contacts"></app-contact-list>
+<app-contact-list [contacts]="contacts" (createContact)="createContact()" (updateContact)="updateContact($event)" (deleteContact)="deleteContact($event)" (showContactOnMap)="showContactOnMap($event)"></app-contact-list>
