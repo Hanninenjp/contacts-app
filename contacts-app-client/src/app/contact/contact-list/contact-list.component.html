@@ -12,7 +12,8 @@
 
   <md-card-content style="padding: 0px 10px;">
 
-    <div *ngFor="let contact of contacts">
+    <!-- async pipe is added to enable implementing observable pattern in contact service -->
+    <div *ngFor="let contact of contacts | async">
       <app-contact-list-item [contact]="contact" (contactUpdate)="onContactUpdate(contact)" (contactDelete)="onContactDelete(contact)" (contactShowOnMap)="onContactShowOnMap(contact)"></app-contact-list-item>
     </div>
 

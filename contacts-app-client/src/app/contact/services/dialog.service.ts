@@ -17,10 +17,9 @@ export class DialogService {
     return dialogRef.afterClosed();
   }
 
-  public editContactDialog(/*pass contact*/) /*return Observable<Contact>*/ {
+  public updateContactDialog(contact: Contact): Observable<Contact> {
     let dialogRef = this.dialog.open(ContactDialogComponent);
-    //Pass contact!
-    dialogRef.componentInstance.contact = new Contact();
+    dialogRef.componentInstance.contact = contact;
     dialogRef.componentInstance.action = "Edit";
     return dialogRef.afterClosed();
   }
