@@ -1,5 +1,10 @@
 <!--
 <h1>AppComponent</h1>
 -->
-
-<app-contact-list [contacts]="contacts" (createContact)="createContact()" (updateContact)="updateContact($event)" (deleteContact)="deleteContact($event)" (showContactOnMap)="showContactOnMap($event)"></app-contact-list>
+<div fxLayout="column" fxLayoutAlign="space-between center">
+  <app-contact-list [contacts]="contacts"
+                    (createContact)="createContact()"
+                    (updateContact)="updateContact($event)"
+                    (deleteContact)="deleteContact($event)"
+                    (showContactOnMap)="showContactOnMap($event)"></app-contact-list>
+</div>

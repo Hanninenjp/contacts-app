@@ -2,59 +2,39 @@
 <h2>ContactListComponent</h2>
 -->
 
-<md-card style="padding: 0px 0px 16px 0px; width: fit-content; height: auto;">
+<div fxFlex="480px">
 
-  <md-card-header style="background: #3f51b5; height: 60px">
+  <md-toolbar color="primary">
+    <h2>Contacts</h2>
+  </md-toolbar>
 
-    <md-card-title><h1 style="color: rgba(255,255,255,.87); line-height: 60px; margin: 0px;">Contacts</h1></md-card-title>
+  <md-card>
 
-  </md-card-header>
+    <md-card-content>
 
-  <md-card-content style="padding: 0px 10px;">
+      <div fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutGap="16px">
 
-    <!-- async pipe is added to enable implementing observable pattern in contact service -->
-    <div *ngFor="let contact of contacts | async">
-      <app-contact-list-item [contact]="contact" (contactUpdate)="onContactUpdate(contact)" (contactDelete)="onContactDelete(contact)" (contactShowOnMap)="onContactShowOnMap(contact)"></app-contact-list-item>
-    </div>
+        <!-- async pipe is added to enable implementing observable pattern in contact service -->
+        <div *ngFor="let contact of contacts | async">
+          <app-contact-list-item [contact]="contact"
+                                 (contactUpdate)="onContactUpdate(contact)"
+                                 (contactDelete)="onContactDelete(contact)"
+                                 (contactShowOnMap)="onContactShowOnMap(contact)"></app-contact-list-item>
+        </div>
 
-  </md-card-content>
+      </div>
 
-  <!-- Consider and add proper styling for the elements!!! -->
+    </md-card-content>
 
-  <md-card-actions align="end" style="padding: 0px; margin: 16px 16px;">
+    <md-card-actions align="end">
 
-    <button md-fab color="accent" (click)="onContactCreate()">
-      <md-icon class="md-48">add</md-icon>
-    </button>
-    <!--
-    <button md-icon-button color="primary">
-      <md-icon class="md-24">delete</md-icon>
-    </button>
-    -->
-
-  </md-card-actions>
-
-  <!--
-
-  <md-card-actions align="start" style="padding: 0px 16px;">
-
-  <button md-icon-button color="primary">
-    <md-icon class="md-24">delete</md-icon>
-  </button>
-  <button md-icon-button color="primary" (click)="contactDialog()">
-    <md-icon class="md-24">edit</md-icon>
-  </button>
-  <button md-icon-button color="primary" style="float: right;" (click)="mapDialog()">
-    <md-icon class="md-24">place</md-icon>
-  </button>
+      <button md-fab color="accent" (click)="onContactCreate()">
+        <md-icon class="md-48">add</md-icon>
+      </button>
 
     </md-card-actions>
-  -->
 
-  <!--
-  <md-card-footer>
-    Footer
-  </md-card-footer>
-  -->
+  </md-card>
 
-</md-card>
+</div>
+

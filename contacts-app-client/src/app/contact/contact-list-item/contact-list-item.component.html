@@ -2,39 +2,41 @@
 <h3>ContactListItemComponent</h3>
 -->
 
-<md-card style="padding: 0px 0px 16px 0px; margin: 16px 0px 16px 0px; width: 400px;">
+<div class="ca-contact-list-item">
 
-  <md-card-header style="background: #3f51b5; height: 60px;">
+  <md-toolbar color="primary">
     <!--
-    <md-card-title>Title</md-card-title>
+    <md-icon>account_circle</md-icon>
     -->
-    <span><md-icon style="line-height: 60px; font-size: 48px; height: 48px; width: 48px; color: rgba(255,255,255,.87);">account_circle</md-icon></span>
-  </md-card-header>
-
-  <md-card-content style="padding: 0px 10px;">
-    <h3>{{contact.firstName}} {{contact.lastName}}</h3>
-    <p>{{contact.streetAddress}}, {{contact.city}}</p>
-    <p><md-icon style="font-size: 14px; height: 14px; width: 14px;">phone</md-icon> {{contact.phone}}</p>
-  </md-card-content>
-
-  <md-card-actions align="start" style="padding: 0px 16px;">
-
-    <button md-icon-button color="primary" (click)="onDelete()">
-      <md-icon class="md-24">delete</md-icon>
+    <button md-icon-button [disabled]="true">
+      <md-icon class="md-24">account_circle</md-icon>
     </button>
-    <button md-icon-button color="primary" (click)="onUpdate()">
-      <md-icon class="md-24">edit</md-icon>
-    </button>
-    <button md-icon-button color="primary" style="float: right;" (click)="onShowOnMap()">
-      <md-icon class="md-24">place</md-icon>
-    </button>
+    <!-- It seems that there may be some issues with automatically scaling the button according to the defined icon size -->
+    <!-- An image could be alternatively tried -->
+  </md-toolbar>
 
-  </md-card-actions>
+  <md-card>
 
-  <!--
-  <md-card-footer>
-    Footer
-  </md-card-footer>
-  -->
+    <md-card-content>
+      <h3>{{contact.firstName}} {{contact.lastName}}</h3>
+      <p>{{contact.streetAddress}}, {{contact.city}}</p>
+      <p><md-icon>phone</md-icon> {{contact.phone}}</p>
+    </md-card-content>
 
-</md-card>
+    <md-card-actions align="start">
+
+      <button md-icon-button color="primary" (click)="onDelete()">
+        <md-icon class="md-24">delete</md-icon>
+      </button>
+      <button md-icon-button color="primary" (click)="onUpdate()">
+        <md-icon class="md-24">edit</md-icon>
+      </button>
+      <button md-icon-button color="primary" (click)="onShowOnMap()" class="ca-button-show-map">
+        <md-icon class="md-24">place</md-icon>
+      </button>
+
+    </md-card-actions>
+
+  </md-card>
+
+</div>
