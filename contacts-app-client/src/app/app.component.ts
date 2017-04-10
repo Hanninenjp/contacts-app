@@ -79,7 +79,17 @@ export class AppComponent{
   deleteContact(contact: Contact){
     console.log("App: deleteContact");
     console.log(JSON.stringify(contact));
-    this.contactService.deleteContact(contact);
+    this.dialogService.deleteContactDialog(contact)
+      .subscribe(confirm => {
+        console.log("Delete confirmed: " + confirm);
+        if(confirm){
+          this.contactService.deleteContact(contact);
+        }
+        else{
+          //Cancelled
+          console.log("Cancelled");
+        }
+      });
   }
 
   showContactOnMap(contact: Contact){

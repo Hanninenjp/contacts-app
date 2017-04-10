@@ -1,0 +1,28 @@
+<!-- Responsive layout should be added -->
+
+<div style="width: 240px; height: auto">
+
+  <!-- Toolbar may be later used with responsive layout -->
+
+  <md-toolbar color="primary">
+    <h2>Confirm</h2>
+  </md-toolbar>
+
+  <md-card>
+
+    <md-card-content>
+
+      <p>Are you sure you want to remove <strong>{{contact.firstName}} {{contact.lastName}}</strong> from contacts?</p>
+
+    </md-card-content>
+
+    <md-card-actions align="start">
+
+      <button md-raised-button color="primary" (click)="actionConfirmed()">Yes</button>
+      <button md-raised-button md-dialog-close color="primary">No</button>
+
+    </md-card-actions>
+
+  </md-card>
+
+</div>
