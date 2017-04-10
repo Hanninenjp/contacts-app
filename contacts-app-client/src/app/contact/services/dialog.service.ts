@@ -13,6 +13,7 @@ export class DialogService {
   public createContactDialog(): Observable<Contact>{
     let dialogRef = this.dialog.open(ContactDialogComponent);
     dialogRef.componentInstance.contact = new Contact();
+    dialogRef.componentInstance.title = "New contact";
     dialogRef.componentInstance.action = "Create";
     return dialogRef.afterClosed();
   }
@@ -20,7 +21,8 @@ export class DialogService {
   public updateContactDialog(contact: Contact): Observable<Contact> {
     let dialogRef = this.dialog.open(ContactDialogComponent);
     dialogRef.componentInstance.contact = contact;
-    dialogRef.componentInstance.action = "Edit";
+    dialogRef.componentInstance.title = "Edit contact";
+    dialogRef.componentInstance.action = "Save";
     return dialogRef.afterClosed();
   }
 

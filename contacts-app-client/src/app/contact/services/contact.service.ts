@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Contact} from "../contact";
 import {BehaviorSubject, Observable} from "rxjs";
+import {LocalStorageService} from "./local-storage.service";
 
 @Injectable()
 export class ContactService {
@@ -27,18 +28,22 @@ export class ContactService {
     contacts: Contact[]
   };
 
-  constructor(){
+  constructor(private localStorageService: LocalStorageService){
     this.contactStore = { contacts: [] };
     this._contacts = <BehaviorSubject<Contact[]>>new BehaviorSubject([]);
     this.contacts = this._contacts.asObservable();
   }
 
   public loadContacts(){
+
     //Test data
-    this.contactStore.contacts.push(new Contact(1, 'First', 'Contact', '0401234567', 'Laserkatu 10', 'Lappeenranta'));
-    this.contactStore.contacts.push(new Contact(2, 'Second', 'Contact', '0401234567', 'Laserkatu 10', 'Lappeenranta'));
+    //this.contactStore.contacts.push(new Contact(1, 'First', 'Contact', '0401234567', 'Laserkatu 10', 'Lappeenranta'));
+    //this.contactStore.contacts.push(new Contact(2, 'Second', 'Contact', '0401234567', 'Laserkatu 10', 'Lappeenranta'));
     //End test data
-    //Local storage handling is not yet implemented
+
+    //Load contacts from local storage
+    this.contactStore.contacts = this.localStorageService.loadContacts();
+
     //Only a copy of contacts is provided
     this._contacts.next(Object.assign({}, this.contactStore).contacts);
   }
@@ -55,9 +60,12 @@ export class ContactService {
       contact.id = 1;
     }
     console.log("Contact: " + JSON.stringify(contact));
-    //Local storage handling is not yet implemented
     this.contactStore.contacts.push(contact);
     console.log("Updated Contacts: " + JSON.stringify(this.contactStore.contacts));
+
+    //Update contacts in local storage
+    this.localStorageService.saveContacts(this.contactStore.contacts);
+
     this._contacts.next(Object.assign({}, this.contactStore).contacts);
   }
 
@@ -67,10 +75,13 @@ export class ContactService {
     console.log("Contact: " + JSON.stringify(contact));
     let index = this.contactStore.contacts.findIndex(c => c.id === contact.id);
     console.log("index: " + index);
-    //Local storage handling is not yet implemented
     //Object.assign(this.contactStore.contacts[index], contact); //Consider update method
     this.contactStore.contacts[index] = contact;
     console.log("Updated Contacts: " + JSON.stringify(this.contactStore.contacts));
+
+    //Update contacts in local storage
+    this.localStorageService.saveContacts(this.contactStore.contacts);
+
     this._contacts.next(Object.assign({}, this.contactStore).contacts);
   }
 
@@ -80,9 +91,12 @@ export class ContactService {
     console.log("Contact: " + JSON.stringify(contact));
     let index = this.contactStore.contacts.findIndex(c => c.id === contact.id);
     console.log("index: " + index);
-    //Local storage handling is not yet implemented
     this.contactStore.contacts.splice(index, 1);
     console.log("Updated Contacts: " + JSON.stringify(this.contactStore.contacts));
+
+    //Update contacts in local storage
+    this.localStorageService.saveContacts(this.contactStore.contacts);
+
     this._contacts.next(Object.assign({}, this.contactStore).contacts);
   }
 }

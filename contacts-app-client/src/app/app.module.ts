@@ -12,6 +12,7 @@ import {MaterialModule} from "@angular/material";
 import { ContactDialogComponent } from './contact/dialogs/contact-dialog/contact-dialog.component';
 import {DialogService} from "./contact/services/dialog.service";
 import { MapDialogComponent } from './contact/dialogs/map-dialog/map-dialog.component';
+import {LocalStorageService} from "./contact/services/local-storage.service";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { MapDialogComponent } from './contact/dialogs/map-dialog/map-dialog.comp
   ],
   providers: [
     ContactService,
-    DialogService
+    DialogService,
+    LocalStorageService
   ],
   bootstrap: [AppComponent],
   entryComponents: [

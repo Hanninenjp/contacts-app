@@ -4,6 +4,8 @@
 
 <div class="ca-contact-list-item">
 
+  <!-- Toolbar may be later used with responsive layout -->
+
   <md-toolbar color="primary">
     <!--
     <md-icon>account_circle</md-icon>
@@ -20,7 +22,7 @@
     <md-card-content>
       <h3>{{contact.firstName}} {{contact.lastName}}</h3>
       <p>{{contact.streetAddress}}, {{contact.city}}</p>
-      <p><md-icon>phone</md-icon> {{contact.phone}}</p>
+      <p><md-icon class="ca-icon-phone">phone</md-icon>{{contact.phone}}</p>
     </md-card-content>
 
     <md-card-actions align="start">

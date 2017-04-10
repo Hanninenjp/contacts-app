@@ -11,6 +11,7 @@ import {Contact} from "../../contact";
 export class ContactDialogComponent implements OnInit {
 
   contact: Contact;
+  title: string;
   action: string;
   contactForm: FormGroup;
 
