@@ -33,9 +33,10 @@ export class DialogService {
     return dialogRef.afterClosed();
   }
 
-  public mapDialog(){
+  public mapDialog(contact: Contact){
     let dialogRef = this.dialog.open(MapDialogComponent);
-    //Pass address string to the dialog
-    return dialogRef.afterClosed();
+    dialogRef.componentInstance.streetAddress = contact.streetAddress;
+    dialogRef.componentInstance.city = contact.city;
+    //return dialogRef.afterClosed();
   }
 }

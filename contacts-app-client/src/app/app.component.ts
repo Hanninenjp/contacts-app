@@ -98,6 +98,6 @@ export class AppComponent{
     //Show on map is not fully implemented
     //Contact shall be passed to dialog service and used to display map
     //according to contact address, Google Maps Embed API will be used
-    this.dialogService.mapDialog();
+    this.dialogService.mapDialog(contact);
   }
 }

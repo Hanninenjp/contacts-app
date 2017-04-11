@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MdDialogRef} from "@angular/material";
+import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-map-dialog',
@@ -8,9 +9,19 @@ import {MdDialogRef} from "@angular/material";
 })
 export class MapDialogComponent implements OnInit {
 
-  constructor(public dialogRef: MdDialogRef<MapDialogComponent>) { }
+  public streetAddress = '';
+  public city = '';
+  public mapUrl: string;
+
+  constructor(public dialogRef: MdDialogRef<MapDialogComponent>, private sanitizer: DomSanitizer) {}
+
+  sanitizeUrl(url: string){
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
 
   ngOnInit() {
+    //Removing extra whitespace characters could be improved
+    this.mapUrl = "https://maps.google.com/maps?q=" + this.streetAddress.trim().replace(' ', '+') + ",+" + this.city.trim().replace(' ', '+') + "&output=embed";
   }
 
 }
