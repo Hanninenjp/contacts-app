@@ -13,20 +13,13 @@ namespace contacts_app_server.Services
 
         public ContactsService()
         {
-            //Generate contacts for development time testing purposes
-
-            for (int i = 0; i < 5; i++)
-            {
-                Contact contact = new Contact();
-                contact.lastName = String.Format("Last{0}", i);
-                _contactsList.Add(contact);
-            }
-
+            //No action needed
         }
 
         public Contact GetContact(int id)
         {
-            return _contactsList.ElementAtOrDefault(id);
+            //Add exception handling
+            return _contactsList.Where(c => c.id == id).FirstOrDefault();
         }
 
         public List<Contact> GetContacts()
@@ -36,19 +29,27 @@ namespace contacts_app_server.Services
 
         public Contact CreateContact(Contact contact)
         {
-            //Returning contact may be redundant
-            //Depends on the next phase specifications
+            //Add exception handling
+            if (_contactsList.Count > 0)
+            {
+                int maxId = _contactsList.Select(c => c.id).Max();
+                contact.id = maxId + 1;
+            }
+            else
+            {
+                contact.id = 1;
+            }
             _contactsList.Add(contact);
             return contact;
         }
 
-        public Contact UpdateContact(int id, Contact contact)
+        public Contact UpdateContact(Contact contact)
         {
-            //Returning contact may be redundant
-            //Depends on the next phase specifications
-            if (IsContact(id))
+            //Add exception handling
+            if (_contactsList.Exists(c => c.id == contact.id))
             {
-                _contactsList[id] = contact;
+                int index = _contactsList.FindIndex(c => c.id == contact.id);
+                _contactsList[index] = contact;
                 return contact;
             }
             else
@@ -59,23 +60,18 @@ namespace contacts_app_server.Services
 
         public Contact DeleteContact(int id)
         {
-            //Returning contact may be redundant
-            //Depends on the next phase specifications
-            if (IsContact(id))
+            //Add exception handling
+            if (_contactsList.Exists(c => c.id == id))
             {
-                Contact contact = _contactsList.ElementAtOrDefault(id);
-                _contactsList.RemoveAt(id);
+                int index = _contactsList.FindIndex(c => c.id == id);
+                Contact contact = _contactsList.ElementAtOrDefault(index);
+                _contactsList.RemoveAt(index);
                 return contact;
             }
             else
             {
                 return null;
             }
-        }
-
-        public bool IsContact(int id)
-        {
-            return _contactsList.ElementAtOrDefault(id) != null;
         }
     }
 }

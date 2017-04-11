@@ -7,10 +7,11 @@ namespace contacts_app_server.Models
 {
     public class Contact
     {
-        public string firstName = "First";
-        public string lastName = "Last";
-        public string phone = "Phone";
-        public string streetAddress = "Address";
-        public string city = "City";
+        public int id;
+        public string firstName;
+        public string lastName;
+        public string phone;
+        public string streetAddress;
+        public string city;
     }
 }

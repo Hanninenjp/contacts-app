@@ -16,6 +16,7 @@ namespace contacts_app_server.Controllers
     public class ContactsController : Controller
     {
 
+        //Add service using dependency injection framework
         private static ContactsService _contactsService = new ContactsService();
         
         // GET: api/contacts
@@ -55,25 +56,23 @@ namespace contacts_app_server.Controllers
             }
             var result = _contactsService.CreateContact(contact);
             //HTTP 200 OK
-            //Returns created contact, this may be redundant
+            //Returns created contact, with assigned id
             return new JsonResult(result);
         }
 
-        // PUT api/contacts/id
-        [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] Contact contact)
+        // PUT api/contacts
+        [HttpPut]
+        public IActionResult Update([FromBody] Contact contact)
         {
             if (contact == null)
             {
                 //HTTP 400 Bad Request
                 return BadRequest("Invalid");
-                //Note: empty JSON {} in the request body is not rejected by the parser, but target object is created with default values
-                //In the present implementation {} in the request body has the effect that contact is updated and the result will be (in JSON)
-                //{ "firstName":"First","lastName":"Last","phone":"Phone","streetAddress":"Address","city":"City"}
             }
-            var result = _contactsService.UpdateContact(id, contact);
+            var result = _contactsService.UpdateContact(contact);
             if (result == null)
             {
+                //Using 404 might not be correct, check the proper status code usage!
                 //HTTP 404 Not Found
                 return NotFound();
             }
@@ -92,15 +91,12 @@ namespace contacts_app_server.Controllers
             var result = _contactsService.DeleteContact(id);
             if (result == null)
             {
+                //Using 404 might not be correct, check the proper status code usage!
                 //HTTP 404 Not Found
                 return NotFound();
             }
             else
             {
-                //HTTP 200 OK
-                //Returns deleted contact, this may be redundant
-                //return new JsonResult(result);
-
                 //HTTP 204 No Content
                 return new NoContentResult();
             }
