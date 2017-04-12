@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Cors;
 using contacts_app_server.Models;
-using contacts_app_server.Services;
+using contacts_app_server.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,8 +16,12 @@ namespace contacts_app_server.Controllers
     public class ContactsController : Controller
     {
 
-        //Add service using dependency injection framework
-        private static ContactsService _contactsService = new ContactsService();
+        private readonly IContactsProvider _contactsService;
+
+        public ContactsController(IContactsProvider contactsProvider)
+        {
+            _contactsService = contactsProvider;
+        }
         
         // GET: api/contacts
         [HttpGet]
@@ -66,6 +70,12 @@ namespace contacts_app_server.Controllers
         {
             if (contact == null)
             {
+                //!!!
+                //Implementation should be improved to properly handle cases where the received json does not define
+                //values for all the properties, for example, json {"id":N}, where N is an id of an existing contact
+                //has the effect that all the properties, except for id are assigned value null
+                //!!!
+
                 //HTTP 400 Bad Request
                 return BadRequest("Invalid");
             }

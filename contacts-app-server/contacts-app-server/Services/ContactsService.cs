@@ -3,28 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using contacts_app_server.Models;
+using contacts_app_server.Interfaces;
 
 namespace contacts_app_server.Services
 {
-    public class ContactsService
+    public class ContactsService : IContactsProvider
     {
         //At this phase simply a list is used to store contacts
-        private static List<Contact> _contactsList = new List<Contact>();
+        private List<Contact> _contactsList = new List<Contact>();
 
         public ContactsService()
         {
             //No action needed
         }
 
+        public List<Contact> GetContacts()
+        {
+            return _contactsList;
+        }
+
         public Contact GetContact(int id)
         {
             //Add exception handling
             return _contactsList.Where(c => c.id == id).FirstOrDefault();
-        }
-
-        public List<Contact> GetContacts()
-        {
-            return _contactsList;
         }
 
         public Contact CreateContact(Contact contact)

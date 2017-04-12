@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using contacts_app_server.Interfaces;
+using contacts_app_server.Services;
 
 namespace contacts_app_server
 {
@@ -42,6 +44,10 @@ namespace contacts_app_server
 
             // Add framework services.
             services.AddMvc();
+
+            //Add app services
+            //Contacts provider
+            services.AddSingleton<IContactsProvider, ContactsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
