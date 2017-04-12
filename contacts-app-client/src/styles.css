@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/core/theming/prebuilt/indigo-pink.css';
+@import '~roboto-fontface/css/roboto/roboto-fontface.css';
 
 @font-face {
   font-family: 'Material Icons';
@@ -24,6 +25,11 @@
   -webkit-font-smoothing: antialiased;
 }
 
+html {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
 body {
   background-color: lightgray;
+  font-family: inherit;
 }

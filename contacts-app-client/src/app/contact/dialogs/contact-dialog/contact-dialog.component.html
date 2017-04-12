@@ -1,50 +1,39 @@
-<!-- Responsive layout should be added -->
+<div class="ca-contact-dialog-container">
 
-<div style="width: 240px; height: auto">
-
-  <!-- Toolbar may be later used with responsive layout -->
-
+  <!--
   <md-toolbar color="primary">
     <h2>{{title}}</h2>
   </md-toolbar>
+  -->
+  <h2>{{title}}</h2>
 
-  <md-card>
+  <form class="ca-contact-dialog-form" [formGroup]="contactForm" novalidate (ngSubmit)="onSubmit(contactForm)">
 
-    <md-card-content>
+    <div class="ca-contact-dialog-form-input-group">
+      <md-input-container class="ca-contact-dialog-form-input-item" floatPlaceholder="auto">
+        <input mdInput name="firstName" formControlName="firstName" placeholder="First name">
+      </md-input-container>
+      <md-input-container class="ca-contact-dialog-form-input-item" floatPlaceholder="auto">
+        <input mdInput formControlName="lastName" placeholder="Last name">
+      </md-input-container>
+      <md-input-container class="ca-contact-dialog-form-input-item" floatPlaceholder="auto">
+        <input mdInput formControlName="phone" placeholder="Phone">
+      </md-input-container>
+      <md-input-container class="ca-contact-dialog-form-input-item" floatPlaceholder="auto">
+        <input mdInput formControlName="streetAddress" placeholder="Street address">
+      </md-input-container>
+      <md-input-container class="ca-contact-dialog-form-input-item" floatPlaceholder="auto">
+        <input mdInput formControlName="city" placeholder="City">
+      </md-input-container>
+    </div>
 
-      <form [formGroup]="contactForm" novalidate (ngSubmit)="onSubmit(contactForm)">
+    <div class="ca-contact-dialog-form-actions">
+      <!-- Validation could be improved, now submit button is simply disabled until form is valid! -->
+      <button md-button type="submit" color="primary" [disabled]="!contactForm.valid">{{action}}</button>
+      <button md-button md-dialog-close color="primary">Cancel</button>
+    </div>
 
-        <md-input-container floatPlaceholder="auto">
-          <input mdInput name="firstName" formControlName="firstName" placeholder="First name">
-        </md-input-container>
-        <md-input-container floatPlaceholder="auto">
-          <input mdInput formControlName="lastName" placeholder="Last name">
-        </md-input-container>
-        <md-input-container floatPlaceholder="auto">
-          <input mdInput formControlName="phone" placeholder="Phone">
-        </md-input-container>
-        <md-input-container floatPlaceholder="auto">
-          <input mdInput formControlName="streetAddress" placeholder="Street address">
-        </md-input-container>
-        <md-input-container floatPlaceholder="auto">
-          <input mdInput formControlName="city" placeholder="City">
-        </md-input-container>
-
-        <!-- Validation could be improved, now submit button is simply disabled until form is valid! -->
-        <button md-raised-button type="submit" color="primary" [disabled]="!contactForm.valid">{{action}}</button>
-        <button md-raised-button md-dialog-close color="primary">Cancel</button>
-      </form>
-
-    </md-card-content>
-
-    <!--Alternatively, action buttons could be placed in the card actions -->
-    <!--
-    <md-card-actions align="start">
-
-    </md-card-actions>
-    -->
-
-  </md-card>
+  </form>
 
 </div>
 

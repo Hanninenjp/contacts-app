@@ -1,28 +1,12 @@
-<!-- Responsive layout should be added -->
+<div class="ca-confirm-dialog-container">
 
-<div style="width: 240px; height: auto">
+  <div class="ca-confirm-dialog-text">
+    <p>Delete <strong>{{contact.firstName}} {{contact.lastName}}</strong> from contacts?</p>
+  </div>
 
-  <!-- Toolbar may be later used with responsive layout -->
-
-  <md-toolbar color="primary">
-    <h2>Confirm</h2>
-  </md-toolbar>
-
-  <md-card>
-
-    <md-card-content>
-
-      <p>Are you sure you want to remove <strong>{{contact.firstName}} {{contact.lastName}}</strong> from contacts?</p>
-
-    </md-card-content>
-
-    <md-card-actions align="start">
-
-      <button md-raised-button color="primary" (click)="actionConfirmed()">Yes</button>
-      <button md-raised-button md-dialog-close color="primary">No</button>
-
-    </md-card-actions>
-
-  </md-card>
+  <div class="ca-confirm-dialog-actions">
+    <button md-button color="primary" md-dialog-close>Cancel</button>
+    <button md-button color="primary" (click)="actionConfirmed()">Delete</button>
+  </div>
 
 </div>

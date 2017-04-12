@@ -1,0 +1,24 @@
+.ca-contact-dialog-container{
+  width: 240px;
+  height: auto;
+}
+
+.ca-contact-dialog-container h2{
+  margin: 0px;
+}
+
+.ca-contact-dialog-form{
+  padding: 24px 0px 0px 0px;
+}
+
+.ca-contact-dialog-form-input-group{
+  clear: both;
+}
+
+.ca-contact-dialog-form-input-item{
+  width: 100%;
+}
+
+.ca-contact-dialog-form-actions{
+  display: block;
+}

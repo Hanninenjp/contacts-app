@@ -1,0 +1,14 @@
+.ca-confirm-dialog-container{
+  min-width: 240px;
+  max-width: 360px;
+  height: auto;
+}
+
+.ca-confirm-dialog-text{
+  clear: both;
+}
+
+.ca-confirm-dialog-actions{
+  display: block;
+  float: right;
+}

@@ -1,19 +1,20 @@
-<!-- Consider adding responsive layout -->
+<div class="ca-map-dialog-container">
 
-<div>
-  <!-- Google maps keyless embed seems to work with following url format -->
-  <!-- src="https://maps.google.com/maps?q=Laserkatu+10,+Lappeenranta&output=embed" -->
-
-  <iframe
-    width="600"
-    height="450"
-    frameborder="0" style="border:0"
-    [src]=sanitizeUrl(mapUrl) allowfullscreen>
-  </iframe>
+  <div class="ca-map-dialog-map-container">
+    <iframe
+      width="600"
+      height="450"
+      frameborder="0" style="border:0"
+      [src]=sanitizeUrl(mapUrl) allowfullscreen>
+    </iframe>
+  </div>
 
   <!--
   <p>mapUrl: {{mapUrl}}</p>
   -->
 
-  <button md-raised-button md-dialog-close color="primary" style="display: block;">Close</button>
+  <div class="ca-map-dialog-actions">
+    <button md-button color="primary" md-dialog-close>Close</button>
+  </div>
+
 </div>
