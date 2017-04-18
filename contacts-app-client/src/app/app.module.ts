@@ -14,6 +14,7 @@ import {DialogService} from "./contact/services/dialog.service";
 import { MapDialogComponent } from './contact/dialogs/map-dialog/map-dialog.component';
 import {LocalStorageService} from "./contact/services/local-storage.service";
 import { ConfirmDialogComponent } from './contact/dialogs/confirm-dialog/confirm-dialog.component';
+import { ContactAddressPipe } from './contact/pipes/contact-address.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ConfirmDialogComponent } from './contact/dialogs/confirm-dialog/confirm
     ContactListItemComponent,
     ContactDialogComponent,
     MapDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    ContactAddressPipe
   ],
   imports: [
     BrowserModule,

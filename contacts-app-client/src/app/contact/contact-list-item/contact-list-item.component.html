@@ -21,7 +21,11 @@
 
     <md-card-content>
       <h3>{{contact.firstName}} {{contact.lastName}}</h3>
+      <!--
       <p>{{contact.streetAddress}}, {{contact.city}}</p>
+      -->
+      <!-- Contact address pipe -->
+      <p>{{contact | contactAddress}}</p>
       <p><md-icon class="ca-icon-phone">phone</md-icon>{{contact.phone}}</p>
     </md-card-content>
 
