@@ -1,10 +1,19 @@
 <!--
 <h1>AppComponent</h1>
 -->
-<div fxLayout="column" fxLayoutAlign="space-between center">
-  <app-contact-list [contacts]="contacts"
-                    (createContact)="createContact()"
-                    (updateContact)="updateContact($event)"
-                    (deleteContact)="deleteContact($event)"
-                    (showContactOnMap)="showContactOnMap($event)"></app-contact-list>
+<div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="16px">
+  <md-toolbar color="primary">
+    <!-- Add navigation, if any is needed -->
+    <h2>Contacts App</h2>
+    <!-- Add login to the right -->
+  </md-toolbar>
+  <!-- Move handling following actions to the contact list component -->
+  <!-- App component level will handle just the different views, differentiated by routing -->
+
+  <router-outlet></router-outlet>
+
+  <!--
+  <app-contact></app-contact>
+  <app-login></app-login>
+  -->
 </div>

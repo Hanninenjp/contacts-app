@@ -1,0 +1,42 @@
+<div fxFlex="360px">
+
+  <md-toolbar color="primary"><h2>Login</h2></md-toolbar>
+
+  <md-card>
+
+    <md-card-content>
+
+      <div fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutGap="0px">
+
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <md-icon class="md-24" color="primary" style="padding-right: 12px">person</md-icon>
+          <md-input-container fxFlex="auto">
+            <input mdInput type="text" [(ngModel)]="user.username" placeholder="Username" required>
+          </md-input-container>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <md-icon class="md-24" color="primary" style="padding-right: 12px">lock</md-icon>
+          <md-input-container fxFlex="auto">
+            <input mdInput type="text" [(ngModel)]="user.password" placeholder="Password" required>
+          </md-input-container>
+        </div>
+
+      </div>
+
+      <p>{{user.username}} {{user.password}}</p>
+
+    </md-card-content>
+
+    <md-card-actions>
+
+      <button md-button color="primary" [disabled]="!user.username || !user.password" (click)="onLogin()">Login</button>
+      <!--
+      <button md-button color="primary">Cancel</button>
+      -->
+
+    </md-card-actions>
+
+  </md-card>
+
+</div>

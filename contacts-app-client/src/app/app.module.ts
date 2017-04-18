@@ -15,6 +15,25 @@ import { MapDialogComponent } from './contact/dialogs/map-dialog/map-dialog.comp
 import {LocalStorageService} from "./contact/services/local-storage.service";
 import { ConfirmDialogComponent } from './contact/dialogs/confirm-dialog/confirm-dialog.component';
 import { ContactAddressPipe } from './contact/pipes/contact-address.pipe';
+import { LoginComponent } from './user/login/login.component';
+import { ContactComponent } from './contact/contact/contact.component';
+import {RouterModule, Routes} from "@angular/router";
+
+const appRoutes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'contacts',
+    component: ContactComponent
+  },
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  }
+];
 
 @NgModule({
   declarations: [
@@ -24,15 +43,18 @@ import { ContactAddressPipe } from './contact/pipes/contact-address.pipe';
     ContactDialogComponent,
     MapDialogComponent,
     ConfirmDialogComponent,
-    ContactAddressPipe
+    ContactAddressPipe,
+    LoginComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
-    //FormsModule,
+    FormsModule,
     ReactiveFormsModule,
     HttpModule,
     FlexLayoutModule,
-    MaterialModule
+    MaterialModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [
     ContactService,
