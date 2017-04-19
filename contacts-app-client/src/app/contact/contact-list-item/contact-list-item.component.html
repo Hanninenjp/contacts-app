@@ -6,27 +6,40 @@
 
   <!-- Toolbar may be later used with responsive layout -->
 
+  <!--
   <md-toolbar color="primary">
-    <!--
-    <md-icon>account_circle</md-icon>
-    -->
     <button md-icon-button [disabled]="true">
       <md-icon class="md-24">account_circle</md-icon>
     </button>
-    <!-- It seems that there may be some issues with automatically scaling the button according to the defined icon size -->
-    <!-- An image could be alternatively tried -->
   </md-toolbar>
+  -->
 
   <md-card>
 
     <md-card-content>
-      <h3>{{contact.firstName}} {{contact.lastName}}</h3>
-      <!--
-      <p>{{contact.streetAddress}}, {{contact.city}}</p>
-      -->
-      <!-- Contact address pipe -->
-      <p>{{contact | contactAddress}}</p>
-      <p><md-icon class="ca-icon-phone">phone</md-icon>{{contact.phone}}</p>
+
+      <div fxLayout="column" fxLayoutAlign="start stretch">
+
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <h3>{{contact.firstName}} {{contact.lastName}}</h3>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <!-- Consider defining classes for different types of text -->
+          <!-- Contact address pipe -->
+          <span>{{contact | contactAddress}}</span>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <!-- Consider defining classes for different types of text -->
+          <!--
+          <md-icon class="ca-icon-phone" style="padding-right: 12px">phone</md-icon>
+          -->
+          <span>{{contact.phone}}</span>
+        </div>
+
+      </div>
+
     </md-card-content>
 
     <md-card-actions align="start">

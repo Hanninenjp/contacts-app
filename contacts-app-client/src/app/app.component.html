@@ -1,19 +1,55 @@
+<!-- Simple layout -->
+
 <!--
-<h1>AppComponent</h1>
--->
 <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="16px">
+
   <md-toolbar color="primary">
-    <!-- Add navigation, if any is needed -->
     <h2>Contacts App</h2>
-    <!-- Add login to the right -->
   </md-toolbar>
-  <!-- Move handling following actions to the contact list component -->
-  <!-- App component level will handle just the different views, differentiated by routing -->
 
   <router-outlet></router-outlet>
 
-  <!--
-  <app-contact></app-contact>
-  <app-login></app-login>
-  -->
 </div>
+-->
+
+<!-- Sidenav layout -->
+
+<md-sidenav-container>
+
+  <md-sidenav #nav mode="over" [opened]="false">
+
+    <div class="ca-sidenav-header" fxLayout="row" fxLayoutAlign="center center">
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <md-icon style="width: 80px; height: 80px; font-size: 80px">account_circle</md-icon>
+        <div style="font-size: 16px">Jukka Hänninen</div>
+        <!--
+        <div style="font-size: 12px">Username</div>
+        -->
+      </div>
+    </div>
+
+    <md-nav-list>
+      <md-list-item>
+        <h3>In GitHub</h3>
+      </md-list-item>
+      <md-list-item>
+        <a href="https://github.com/Hanninenjp/contacts-app">contacts-app</a>
+      </md-list-item>
+    </md-nav-list>
+
+  </md-sidenav>
+
+  <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="16px">
+
+    <md-toolbar color="primary">
+      <button md-icon-button (click)="nav.open()">
+        <md-icon class="md-24">menu</md-icon>
+      </button>
+      <h2>Contacts App</h2>
+    </md-toolbar>
+
+    <router-outlet></router-outlet>
+
+  </div>
+
+</md-sidenav-container>
