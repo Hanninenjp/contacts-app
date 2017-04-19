@@ -1,5 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Theme is defined in ca-theme.scss */
+/*
 @import '~@angular/material/core/theming/prebuilt/indigo-pink.css';
+*/
+
 @import '~roboto-fontface/css/roboto/roboto-fontface.css';
 
 @font-face {
