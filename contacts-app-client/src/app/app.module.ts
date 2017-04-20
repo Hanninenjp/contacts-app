@@ -18,6 +18,7 @@ import { ContactAddressPipe } from './contact/pipes/contact-address.pipe';
 import { LoginComponent } from './user/login/login.component';
 import { ContactComponent } from './contact/contact/contact.component';
 import {RouterModule, Routes} from "@angular/router";
+import {ContactApiService} from "./contact/services/contact-api.service";
 
 const appRoutes: Routes = [
   {
@@ -59,7 +60,8 @@ const appRoutes: Routes = [
   providers: [
     ContactService,
     DialogService,
-    LocalStorageService
+    LocalStorageService,
+    ContactApiService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
