@@ -11,7 +11,7 @@ namespace contacts_app_server.Interfaces
         List<Contact> GetContacts();
         Contact GetContact(int id);
         Contact CreateContact(Contact contact);
-        Contact UpdateContact(Contact contact);
+        Contact UpdateContact(int id, Contact contact);
         Contact DeleteContact(int id);
     }
 }

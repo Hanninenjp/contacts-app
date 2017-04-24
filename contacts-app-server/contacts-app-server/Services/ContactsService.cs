@@ -44,9 +44,13 @@ namespace contacts_app_server.Services
             return contact;
         }
 
-        public Contact UpdateContact(Contact contact)
+        public Contact UpdateContact(int id, Contact contact)
         {
             //Add exception handling
+            if (id != contact.id)
+            {
+                return null;
+            }
             if (_contactsList.Exists(c => c.id == contact.id))
             {
                 int index = _contactsList.FindIndex(c => c.id == contact.id);

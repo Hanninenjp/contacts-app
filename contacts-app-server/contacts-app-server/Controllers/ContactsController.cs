@@ -39,8 +39,8 @@ namespace contacts_app_server.Controllers
             var result = _contactsService.GetContact(id);
             if (result == null)
             {
-                //HTTP 404 Not Found
-                return NotFound();
+                //HTTP 400 Bad Request
+                return BadRequest("Invalid");
             }
             else
             {
@@ -65,8 +65,8 @@ namespace contacts_app_server.Controllers
         }
 
         // PUT api/contacts
-        [HttpPut]
-        public IActionResult Update([FromBody] Contact contact)
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, [FromBody] Contact contact)
         {
             if (contact == null)
             {
@@ -79,12 +79,11 @@ namespace contacts_app_server.Controllers
                 //HTTP 400 Bad Request
                 return BadRequest("Invalid");
             }
-            var result = _contactsService.UpdateContact(contact);
+            var result = _contactsService.UpdateContact(id, contact);
             if (result == null)
             {
-                //Using 404 might not be correct, check the proper status code usage!
-                //HTTP 404 Not Found
-                return NotFound();
+                //HTTP 400 Bad Request
+                return BadRequest("Invalid");
             }
             else
             {
@@ -101,14 +100,19 @@ namespace contacts_app_server.Controllers
             var result = _contactsService.DeleteContact(id);
             if (result == null)
             {
-                //Using 404 might not be correct, check the proper status code usage!
-                //HTTP 404 Not Found
-                return NotFound();
+                //HTTP 400 Bad Request
+                return BadRequest("Invalid");
             }
             else
             {
+                /*
                 //HTTP 204 No Content
                 return new NoContentResult();
+                */
+
+                //HTTP 200 OK
+                //Returns removed contact, this may be redundant
+                return new JsonResult(result);
             }
         }
     }
