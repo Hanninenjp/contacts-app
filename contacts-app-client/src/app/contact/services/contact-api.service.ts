@@ -1,33 +1,39 @@
 import { Injectable } from '@angular/core';
 import {Http} from "@angular/http";
 import {Contact} from "../contact";
+import {environment} from "../../../environments/environment";
+import {ContactProvider} from "./contact-provider";
+import {Observable} from "rxjs/Observable";
+
 
 @Injectable()
-export class ContactApiService {
+export class ContactApiService implements ContactProvider{
 
   private baseUrl: string;
 
   constructor(private http: Http) {
-    this.baseUrl = 'http://localhost:51367/api';
+    this.baseUrl = environment.contactApiUrl;
   }
 
-  loadContacts() {
+  loadContacts(): Observable<Contact[]>{
     return this.http.get(this.baseUrl + '/contacts')
       .map(response => response.json() as Contact[]);
   }
 
-  createContact(contact: Contact){
+  createContact(contact: Contact): Observable<Contact>{
     return this.http.post(this.baseUrl + '/contacts', contact)
       .map(response => response.json() as Contact);
   }
 
-  updateContact(contact: Contact){
+  updateContact(contact: Contact): Observable<Contact>{
     return this.http.put(this.baseUrl + '/contacts/' + contact.id, contact)
+      //Current API implementation returns updated contact
       .map(response => response.json() as Contact);
   }
 
-  deleteContact(contact: Contact){
+  deleteContact(contact: Contact): Observable<Contact>{
     return this.http.delete(this.baseUrl + '/contacts/' + contact.id)
-      .map(response => response.status);
+    //Current API implementation returns deleted contact
+      .map(response => response.json() as Contact);
   }
 }
