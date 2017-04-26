@@ -1,9 +1,11 @@
 <div class="ca-map-dialog-container">
 
+  <!-- Dimensions should rather be responsive and need further consideration! -->
+  <!-- For example, width="600" height="450" looks fine in desktop, but not in mobile -->
   <div class="ca-map-dialog-map-container">
     <iframe
-      width="600"
-      height="450"
+      width="280"
+      height="320"
       frameborder="0" style="border:0"
       [src]=sanitizeUrl(mapUrl) allowfullscreen>
     </iframe>
