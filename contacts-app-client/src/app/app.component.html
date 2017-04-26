@@ -16,7 +16,7 @@
 
 <md-sidenav-container>
 
-  <md-sidenav #nav mode="over" [opened]="false">
+  <md-sidenav class="ca-sidenav" #nav mode="over" [opened]="false">
 
     <div class="ca-sidenav-header" fxLayout="row" fxLayoutAlign="center center">
       <div fxLayout="column" fxLayoutAlign="center center">
@@ -39,17 +39,25 @@
 
   </md-sidenav>
 
-  <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="16px">
+  <div class="ca-app-content">
 
-    <md-toolbar color="primary">
-      <button md-icon-button (click)="nav.open()">
-        <md-icon class="md-24">menu</md-icon>
-      </button>
-      <h2>Contacts App</h2>
-    </md-toolbar>
+    <div fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutAlign.xs="space-between stretch"
+         fxLayoutGap="16px">
 
-    <router-outlet></router-outlet>
+      <md-toolbar class="ca-app-toolbar" color="primary" fxFlex="100vw">
+        <button md-icon-button (click)="nav.open()">
+          <md-icon class="md-24">menu</md-icon>
+        </button>
+        <h2>Contacts App</h2>
+      </md-toolbar>
+
+      <div class="ca-toolbar-placeholder-fix"></div>
+
+      <router-outlet></router-outlet>
+
+    </div>
 
   </div>
+
 
 </md-sidenav-container>
