@@ -19,6 +19,8 @@ import { LoginComponent } from './user/login/login.component';
 import { ContactComponent } from './contact/contact/contact.component';
 import {RouterModule, Routes} from "@angular/router";
 import {ContactApiService} from "./contact/services/contact-api.service";
+import { VibrationDirective } from './device/directives/vibration.directive';
+import {DeviceService} from "./device/services/device.service";
 
 const appRoutes: Routes = [
   {
@@ -46,7 +48,8 @@ const appRoutes: Routes = [
     ConfirmDialogComponent,
     ContactAddressPipe,
     LoginComponent,
-    ContactComponent
+    ContactComponent,
+    VibrationDirective
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,8 @@ const appRoutes: Routes = [
     ContactService,
     DialogService,
     LocalStorageService,
-    ContactApiService
+    ContactApiService,
+    DeviceService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
