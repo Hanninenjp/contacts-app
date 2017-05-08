@@ -20,7 +20,7 @@ export class LocalStorageService {
     return Observable.of(contacts);
   }
 
-  createContact(contact: Contact): Observable<Contact>{
+  public createContact(contact: Contact): Observable<Contact>{
     let storageElement = localStorage.getItem(this.contactLocalStorageKey);
     let contacts = JSON.parse(storageElement);
     if(contacts.length > 0){
@@ -37,7 +37,7 @@ export class LocalStorageService {
     return Observable.of(contact);
   }
 
-  updateContact(contact: Contact): Observable<Contact>{
+  public updateContact(contact: Contact): Observable<Contact>{
     let storageElement = localStorage.getItem(this.contactLocalStorageKey);
     let contacts = JSON.parse(storageElement);
     let index = contacts.findIndex(c => c.id === contact.id);
@@ -47,7 +47,7 @@ export class LocalStorageService {
     return Observable.of(contact);
   }
 
-  deleteContact(contact: Contact): Observable<Contact>{
+  public deleteContact(contact: Contact): Observable<Contact>{
     let storageElement = localStorage.getItem(this.contactLocalStorageKey);
     let contacts = JSON.parse(storageElement);
     let index = contacts.findIndex(c => c.id === contact.id);
