@@ -9,8 +9,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 using contacts_app_server.Interfaces;
 using contacts_app_server.Services;
+using contacts_app_server.Data;
 
 namespace contacts_app_server
 {
@@ -31,6 +33,12 @@ namespace contacts_app_server
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Add framework services.
+
+            //Database
+            services.AddDbContext<ContactsContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")));
+
             // Cors, see https://docs.microsoft.com/en-us/aspnet/core/security/cors
             // Add Cors and create Policy with options
             services.AddCors(options =>
@@ -42,21 +50,25 @@ namespace contacts_app_server
                     .AllowCredentials());
             });
 
-            // Add framework services.
+            //MVC
             services.AddMvc();
 
             //Add app services
-            //Contacts provider
-            services.AddSingleton<IContactsProvider, ContactsService>();
+
+            //Contacts repository
+            //services.AddSingleton<IContactsRepository, ContactsService>();
+            services.AddScoped<IContactsRepository, ContactsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ContactsContext context)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
             app.UseMvc();
+
+            DbInitializer.Initialize(context);
         }
     }
 }

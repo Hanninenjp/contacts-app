@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace contacts_app_server.Models
 {
     public class Contact
     {
-        public int id;
-        public string firstName;
-        public string lastName;
-        public string phone;
-        public string streetAddress;
-        public string city;
+        [Key]
+        public int id { get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
+        public string phone { get; set; }
+        public string streetAddress { get; set; }
+        public string city { get; set; }
     }
 }

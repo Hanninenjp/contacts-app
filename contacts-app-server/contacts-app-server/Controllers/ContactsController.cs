@@ -16,11 +16,11 @@ namespace contacts_app_server.Controllers
     public class ContactsController : Controller
     {
 
-        private readonly IContactsProvider _contactsService;
+        private readonly IContactsRepository _contactsService;
 
-        public ContactsController(IContactsProvider contactsProvider)
+        public ContactsController(IContactsRepository contactsRepository)
         {
-            _contactsService = contactsProvider;
+            _contactsService = contactsRepository;
         }
         
         // GET: api/contacts

@@ -6,7 +6,7 @@ using contacts_app_server.Models;
 
 namespace contacts_app_server.Interfaces
 {
-    public interface IContactsProvider
+    public interface IContactsRepository
     {
         List<Contact> GetContacts();
         Contact GetContact(int id);
