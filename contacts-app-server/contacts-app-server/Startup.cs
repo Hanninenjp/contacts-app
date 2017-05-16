@@ -10,9 +10,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using contacts_app_server.Interfaces;
 using contacts_app_server.Services;
 using contacts_app_server.Data;
+using contacts_app_server.Middleware;
+using System.Text;
 
 namespace contacts_app_server
 {
@@ -29,6 +34,10 @@ namespace contacts_app_server
         }
 
         public IConfigurationRoot Configuration { get; }
+
+        //Authentication middleware
+        private static readonly string secretKey = "!!!supersecretkey!!!";
+        //End authentication middleware
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -65,6 +74,54 @@ namespace contacts_app_server
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            //Authentication middleware
+            var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
+
+            //Token provider
+            var options = new TokenProviderOptions
+            {
+                Audience = "Test",
+                Issuer = "Test",
+                SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256),
+            };
+
+            app.UseMiddleware<TokenProviderMiddleware>(Options.Create(options));
+            //End token provider
+
+            //Token validation
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                // The signing key must match!
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = signingKey,
+
+                // Validate the JWT Issuer (iss) claim
+                ValidateIssuer = true,
+                ValidIssuer = "Test",
+
+                // Validate the JWT Audience (aud) claim
+                ValidateAudience = true,
+                ValidAudience = "Test",
+
+                // Validate the token expiry
+                ValidateLifetime = true,
+
+                // If you want to allow a certain amount of clock drift, set that here:
+                ClockSkew = TimeSpan.Zero
+            };
+
+            app.UseJwtBearerAuthentication(new JwtBearerOptions
+            {
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                TokenValidationParameters = tokenValidationParameters
+            });
+            //End token validation
+
+            //End authentication middleware
+
+
 
             app.UseMvc();
 

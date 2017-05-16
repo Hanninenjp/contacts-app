@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Cors;
 using contacts_app_server.Models;
 using contacts_app_server.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -22,8 +23,9 @@ namespace contacts_app_server.Controllers
         {
             _contactsService = contactsRepository;
         }
-        
+
         // GET: api/contacts
+        [Authorize]
         [HttpGet]
         public IActionResult Get()
         {
@@ -33,6 +35,7 @@ namespace contacts_app_server.Controllers
         }
 
         // GET api/contacts/id
+        [Authorize]
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -50,6 +53,7 @@ namespace contacts_app_server.Controllers
         }
 
         // POST api/contacts
+        [Authorize]
         [HttpPost]
         public IActionResult Create([FromBody] Contact contact)
         {
@@ -65,6 +69,7 @@ namespace contacts_app_server.Controllers
         }
 
         // PUT api/contacts
+        [Authorize]
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody] Contact contact)
         {
@@ -94,6 +99,7 @@ namespace contacts_app_server.Controllers
         }
 
         // DELETE api/contacts/id
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
