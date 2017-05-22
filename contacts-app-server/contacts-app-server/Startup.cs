@@ -17,7 +17,9 @@ using contacts_app_server.Interfaces;
 using contacts_app_server.Services;
 using contacts_app_server.Data;
 using contacts_app_server.Middleware;
+using contacts_app_server.Models;
 using System.Text;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace contacts_app_server
 {
@@ -44,8 +46,12 @@ namespace contacts_app_server
         {
             // Add framework services.
 
-            //Database
+            //Contacts
             services.AddDbContext<ContactsContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")));
+
+            //Identity
+            services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")));
 
             // Cors, see https://docs.microsoft.com/en-us/aspnet/core/security/cors
@@ -58,6 +64,20 @@ namespace contacts_app_server
                     .AllowAnyHeader()
                     .AllowCredentials());
             });
+
+            //Identity
+            services.AddIdentity<ApplicationUser, IdentityRole> (o =>
+            {
+                // configure identity options
+                o.Password.RequireDigit = false;
+                o.Password.RequireLowercase = false;
+                o.Password.RequireUppercase = false;
+                o.Password.RequireNonAlphanumeric = false;
+                o.Password.RequiredLength = 6;
+            })
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
+            //end Identity
 
             //MVC
             services.AddMvc();
@@ -74,6 +94,9 @@ namespace contacts_app_server
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            //Cors
+            app.UseCors("CorsPolicy");
 
             //Authentication middleware
             var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
@@ -121,7 +144,9 @@ namespace contacts_app_server
 
             //End authentication middleware
 
-
+            //Identity
+            app.UseIdentity();
+            //End Identity
 
             app.UseMvc();
 
