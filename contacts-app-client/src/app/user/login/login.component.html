@@ -26,6 +26,10 @@
           </md-input-container>
         </div>
 
+        <div *ngIf="error" fxLayout="row" fxLayoutAlign="start center">
+          <span style="color: red">{{error}}</span>
+        </div>
+
       </div>
 
       <!--

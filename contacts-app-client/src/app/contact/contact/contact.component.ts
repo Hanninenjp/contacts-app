@@ -75,6 +75,10 @@ export class ContactComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    console.log('ContactComponent: ngOnInit');
+    console.log('ContactComponent: loading contacts');
+
     //Observable contact service initialization
     this.contacts = this.contactService.contacts;
     this.contactService.loadContacts();

@@ -21,6 +21,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {ContactApiService} from "./contact/services/contact-api.service";
 import { VibrationDirective } from './device/directives/vibration.directive';
 import {DeviceService} from "./device/services/device.service";
+import {AuthenticationService} from "./user/services/authentication.service";
 
 const appRoutes: Routes = [
   {
@@ -65,7 +66,8 @@ const appRoutes: Routes = [
     DialogService,
     LocalStorageService,
     ContactApiService,
-    DeviceService
+    DeviceService,
+    AuthenticationService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
