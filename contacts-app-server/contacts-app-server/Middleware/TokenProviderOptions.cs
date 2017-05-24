@@ -5,7 +5,7 @@ namespace contacts_app_server.Middleware
 {
     public class TokenProviderOptions
     {
-        public string Path { get; set; } = "/token"; //Fix the path in the final version!!!
+        public string Path { get; set; } = "/api/authenticate";
 
         public string Issuer { get; set; }
 

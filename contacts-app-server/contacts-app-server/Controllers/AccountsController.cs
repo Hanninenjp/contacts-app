@@ -17,12 +17,10 @@ namespace contacts_app_server.Controllers
     public class AccountsController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        //private readonly ApplicationDbContext _appDbContext;
 
-        public AccountsController(UserManager<ApplicationUser> userManager/*, ApplicationDbContext appDbContext*/)
+        public AccountsController(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
-            //_appDbContext = appDbContext;
         }
 
         // POST api/accounts
@@ -30,6 +28,11 @@ namespace contacts_app_server.Controllers
         [HttpPost]
         public async Task<IActionResult> Register([FromBody] RegistrationViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Registration failed");
+            }
+
             //Following could be refactored
             ApplicationUser user = new ApplicationUser();
             user.UserName = model.email;
@@ -43,9 +46,6 @@ namespace contacts_app_server.Controllers
             {
                 return BadRequest("Registration failed");
             }
-
-            //await _appDbContext.AddAsync(user);
-            //await _appDbContext.SaveChangesAsync();
 
             //Alternatively
             //return new OkResult();
