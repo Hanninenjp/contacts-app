@@ -31,13 +31,13 @@ export class LoginComponent implements OnInit {
           console.log('LoginComponent: onLogin: error');
           //this.user.username = '';
           //this.user.password = '';
-          this.error = 'Invalid username or password!';
+          this.error = 'Login failed.';
         }
       }, error => {
         console.log('LoginComponent: onLogin: error');
         //this.user.username = '';
         //this.user.password = '';
-        this.error = 'Invalid username or password!';
+        this.error = error;
       });
   }
 
