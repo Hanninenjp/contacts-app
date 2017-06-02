@@ -1,17 +1,25 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {Http, Headers, RequestOptions, Response} from "@angular/http";
-import {Router} from "@angular/router";
 import {Observable} from "rxjs/Observable";
+import {Subject} from "rxjs/Subject";
 
 @Injectable()
 export class AuthenticationService {
 
   private baseUrl: string;
+  private appUser: string;
+  private authState: Subject<boolean>;
 
-  constructor(private http: Http, private appRouter: Router) {
+  constructor(private http: Http) {
     this.baseUrl = environment.contactApiUrl;
+    this.appUser = '';
+    this.authState = new Subject<boolean>();
   }
+
+  //Current implementation provides support for simple token-based authentication, but some
+  //functionality is currently not implemented, including keeping track of token expiration,
+  //and refreshing token
 
   public login(username: string, password: string): Observable<boolean>{
     //Current server middleware implementation requires that username and password are
@@ -30,6 +38,8 @@ export class AuthenticationService {
         let token = response.json() && response.json().access_token;
         if(token){
           localStorage.setItem('ca-token', token);
+          this.appUser = username;
+          this.authState.next(true);
           return true;
         }
         else{
@@ -58,4 +68,16 @@ export class AuthenticationService {
         return Observable.throw(errorMessage);
       });
   }
+
+  public logout(): Observable<boolean>{
+    localStorage.removeItem('ca-token');
+    this.appUser = '';
+    this.authState.next(false);
+    return Observable.of(true);
+  }
+
+  public getAuthState(): Observable<boolean>{
+    return this.authState.asObservable();
+  }
+
 }

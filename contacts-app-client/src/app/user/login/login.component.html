@@ -27,23 +27,16 @@
         </div>
 
         <div *ngIf="error" fxLayout="row" fxLayoutAlign="start center">
-          <span style="color: red">{{error}}</span>
+          <span style="color: red"><em>{{error}}</em></span>
         </div>
 
       </div>
-
-      <!--
-      <p>{{user.username}} {{user.password}}</p>
-      -->
 
     </md-card-content>
 
     <md-card-actions>
 
       <button md-button color="primary" [disabled]="!user.username || !user.password" (click)="onLogin()">Login</button>
-      <!--
-      <button md-button color="primary">Cancel</button>
-      -->
 
     </md-card-actions>
 

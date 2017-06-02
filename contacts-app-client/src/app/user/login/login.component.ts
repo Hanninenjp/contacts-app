@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {User} from "../user";
 import {AuthenticationService} from "../services/authentication.service";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,6 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(){
-
     console.log('LoginComponent: onLogin');
     this.error = '';
     this.authentication.login(this.user.username, this.user.password)
@@ -29,19 +29,28 @@ export class LoginComponent implements OnInit {
         }
         else{
           console.log('LoginComponent: onLogin: error');
-          //this.user.username = '';
-          //this.user.password = '';
+          this.user.username = '';
+          this.user.password = '';
           this.error = 'Login failed.';
         }
       }, error => {
         console.log('LoginComponent: onLogin: error');
-        //this.user.username = '';
-        //this.user.password = '';
+        this.user.username = '';
+        this.user.password = '';
         this.error = error;
       });
   }
 
   ngOnInit() {
+    if(!environment.contactApiUrl){
+      //Local environment
+      //Authentication is not supported
+      this.appRouter.navigate(['/contacts']);
+    }
+    else{
+      //Logout current user
+      this.authentication.logout();
+    }
   }
 
 }
