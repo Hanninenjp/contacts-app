@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
-//Cors, see https://docs.microsoft.com/en-us/aspnet/core/security/cors
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -74,6 +73,7 @@ namespace contacts_app_server
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredLength = 6;
+                options.Cookies.ApplicationCookie.AutomaticChallenge = false;
             })
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
@@ -85,7 +85,6 @@ namespace contacts_app_server
             //Add app services
 
             //Contacts repository
-            //services.AddSingleton<IContactsRepository, ContactsService>();
             services.AddScoped<IContactsRepository, ContactsService>();
         }
 
@@ -148,8 +147,10 @@ namespace contacts_app_server
             app.UseIdentity();
             //End Identity
 
+            //MVC
             app.UseMvc();
 
+            //Contacts repository
             DbInitializer.Initialize(context);
         }
     }

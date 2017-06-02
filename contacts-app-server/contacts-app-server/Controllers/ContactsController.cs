@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace contacts_app_server.Controllers
 {
-    [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     public class ContactsController : Controller
     {
@@ -43,7 +42,7 @@ namespace contacts_app_server.Controllers
             if (result == null)
             {
                 //HTTP 400 Bad Request
-                return BadRequest("Invalid");
+                return BadRequest("Invalid request.");
             }
             else
             {
@@ -57,10 +56,10 @@ namespace contacts_app_server.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] Contact contact)
         {
-            if (contact == null)
+            if (!ModelState.IsValid)
             {
                 //HTTP 400 Bad Request
-                return BadRequest("Invalid");
+                return BadRequest("Invalid request.");
             }
             var result = _contactsService.CreateContact(contact);
             //HTTP 200 OK
@@ -73,22 +72,16 @@ namespace contacts_app_server.Controllers
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody] Contact contact)
         {
-            if (contact == null)
+            if (!ModelState.IsValid)
             {
-                //!!!
-                //Implementation should be improved to properly handle cases where the received json does not define
-                //values for all the properties, for example, json {"id":N}, where N is an id of an existing contact
-                //has the effect that all the properties, except for id are assigned value null
-                //!!!
-
                 //HTTP 400 Bad Request
-                return BadRequest("Invalid");
+                return BadRequest("Invalid request.");
             }
             var result = _contactsService.UpdateContact(id, contact);
             if (result == null)
             {
                 //HTTP 400 Bad Request
-                return BadRequest("Invalid");
+                return BadRequest("Invalid request.");
             }
             else
             {
@@ -107,7 +100,7 @@ namespace contacts_app_server.Controllers
             if (result == null)
             {
                 //HTTP 400 Bad Request
-                return BadRequest("Invalid");
+                return BadRequest("Invalid request.");
             }
             else
             {

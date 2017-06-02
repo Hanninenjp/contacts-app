@@ -40,7 +40,7 @@ namespace contacts_app_server.Middleware
                || !context.Request.HasFormContentType)
             {
                 context.Response.StatusCode = 400;
-                return context.Response.WriteAsync("Bad request.");
+                return context.Response.WriteAsync("Invalid request.");
             }
 
             return GenerateToken(context);
