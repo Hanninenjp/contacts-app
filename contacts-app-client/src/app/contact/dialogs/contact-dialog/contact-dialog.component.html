@@ -1,10 +1,5 @@
 <div class="ca-contact-dialog-container">
 
-  <!--
-  <md-toolbar color="primary">
-    <h2>{{title}}</h2>
-  </md-toolbar>
-  -->
   <h2>{{title}}</h2>
 
   <form class="ca-contact-dialog-form" [formGroup]="contactForm" novalidate (ngSubmit)="onSubmit(contactForm)">
@@ -36,9 +31,3 @@
   </form>
 
 </div>
-
-<!-- For development time debugging -->
-<!--
-<p>Form valid: {{contactForm.valid}}</p>
-<p>Form value: {{contactForm.value | json}}</p>
--->

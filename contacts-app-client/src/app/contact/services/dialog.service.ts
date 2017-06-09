@@ -39,4 +39,5 @@ export class DialogService {
     dialogRef.componentInstance.city = contact.city;
     //return dialogRef.afterClosed();
   }
+
 }

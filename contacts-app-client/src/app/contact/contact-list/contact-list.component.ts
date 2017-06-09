@@ -17,25 +17,18 @@ export class ContactListComponent implements OnInit {
   constructor() { }
 
   onContactCreate(){
-    console.log("ContactList: onContactCreate");
     this.createContact.emit();
   }
 
   onContactUpdate(contact: Contact){
-    console.log("ContactList: onContactUpdate");
-    console.log(contact);
     this.updateContact.emit(contact);
   }
 
   onContactDelete(contact: Contact){
-    console.log("ContactList: onContactDelete");
-    console.log(contact);
     this.deleteContact.emit(contact);
   }
 
   onContactShowOnMap(contact: Contact){
-    console.log("ContactList: onContactShowOnMap");
-    console.log(contact);
     this.showContactOnMap.emit(contact);
   }
 

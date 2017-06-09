@@ -7,14 +7,12 @@ export class DeviceService {
 
   constructor() {
     document.addEventListener('deviceready', () => {
-      console.log('DeviceService: deviceready');
       this.cordova = true;
     }, false);
   }
 
   public vibrate(time?: number){
     if(this.cordova){
-      console.log('DeviceService: vibrate');
       navigator.vibrate(time || 100);
     }
   }

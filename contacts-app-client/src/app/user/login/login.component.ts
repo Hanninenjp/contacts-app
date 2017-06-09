@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(){
-    console.log('LoginComponent: onLogin');
     this.error = '';
     this.authentication.login(this.user.username, this.user.password)
       .subscribe(result => {
@@ -28,13 +27,11 @@ export class LoginComponent implements OnInit {
           this.appRouter.navigate(['/contacts']);
         }
         else{
-          console.log('LoginComponent: onLogin: error');
           this.user.username = '';
           this.user.password = '';
           this.error = 'Login failed.';
         }
       }, error => {
-        console.log('LoginComponent: onLogin: error');
         this.user.username = '';
         this.user.password = '';
         this.error = error;

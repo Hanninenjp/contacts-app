@@ -12,7 +12,6 @@ export class VibrationDirective {
 
   @HostListener('click', ['$event'])
   onClick() {
-    console.log('VibrationDirective: click');
     this.deviceService.vibrate();
   }
 

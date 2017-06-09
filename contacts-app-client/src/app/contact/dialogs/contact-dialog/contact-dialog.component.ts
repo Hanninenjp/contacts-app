@@ -20,16 +20,9 @@ export class ContactDialogComponent implements OnInit {
   //Reactive forms are used
 
   onSubmit(form: FormGroup) {
-    console.log("ContactDialog: onSubmit");
-    console.log("Form valid:");
-    console.log(form.valid);
-    console.log("Form:");
-    console.log(this.contactForm.value);
     let saveContact: Contact = new Contact();
     saveContact.id = this.contact.id;
     Object.assign(saveContact, this.contactForm.value);
-    console.log("Contact:");
-    console.log(saveContact);
     this.dialogRef.close(saveContact);
   }
 

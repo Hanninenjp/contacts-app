@@ -16,17 +16,14 @@ export class ContactListItemComponent implements OnInit {
   constructor() { }
 
   onUpdate(){
-    console.log("ContactListItem: onUpdate");
     this.contactUpdate.emit();
   }
 
   onDelete(){
-    console.log("ContactListItem: onDelete");
     this.contactDelete.emit();
   }
 
   onShowOnMap(){
-    console.log("ContactListItem: onShowOnMap");
     this.contactShowOnMap.emit();
   }
 

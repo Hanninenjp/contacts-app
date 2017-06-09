@@ -43,13 +43,11 @@ export class AuthenticationService {
         if(token){
           localStorage.setItem('ca-token', token);
           let tokenPayload = this.jwtHelper.decodeToken(token);
-          console.log(tokenPayload);
           this.authenticatedUser = new User(tokenPayload.given_name || '', tokenPayload.family_name || '', username, password);
           this.applicationUser.next(this.authenticatedUser);
           return true;
         }
         else{
-          console.log('Authentication service: login: no token');
           return false;
         }
       })
@@ -57,8 +55,6 @@ export class AuthenticationService {
       // handling implementation could be refactored
       .catch((error: any) => {
         let errorMessage = '';
-        console.log('Authentication service: login: error');
-        console.log(JSON.stringify(error));
         if(error instanceof Response){
           if(error.status){
             errorMessage = error.text() || 'Login failed.';
