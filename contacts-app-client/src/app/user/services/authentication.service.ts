@@ -3,18 +3,22 @@ import {environment} from "../../../environments/environment";
 import {Http, Headers, RequestOptions, Response} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import {Subject} from "rxjs/Subject";
+import {JwtHelper} from "angular2-jwt";
+import {User} from "../user";
 
 @Injectable()
 export class AuthenticationService {
 
   private baseUrl: string;
-  private appUser: string;
-  private authState: Subject<boolean>;
+  private authenticatedUser: User;
+  private applicationUser: Subject<User>;
+  private jwtHelper: JwtHelper;
 
   constructor(private http: Http) {
     this.baseUrl = environment.contactApiUrl;
-    this.appUser = '';
-    this.authState = new Subject<boolean>();
+    this.authenticatedUser = null;
+    this.applicationUser = new Subject<User>();
+    this.jwtHelper = new JwtHelper();
   }
 
   //Current implementation provides support for simple token-based authentication, but some
@@ -38,8 +42,10 @@ export class AuthenticationService {
         let token = response.json() && response.json().access_token;
         if(token){
           localStorage.setItem('ca-token', token);
-          this.appUser = username;
-          this.authState.next(true);
+          let tokenPayload = this.jwtHelper.decodeToken(token);
+          console.log(tokenPayload);
+          this.authenticatedUser = new User(tokenPayload.given_name || '', tokenPayload.family_name || '', username, password);
+          this.applicationUser.next(this.authenticatedUser);
           return true;
         }
         else{
@@ -71,13 +77,20 @@ export class AuthenticationService {
 
   public logout(): Observable<boolean>{
     localStorage.removeItem('ca-token');
-    this.appUser = '';
-    this.authState.next(false);
+    this.authenticatedUser = null;
+    this.applicationUser.next(this.authenticatedUser);
     return Observable.of(true);
   }
 
-  public getAuthState(): Observable<boolean>{
-    return this.authState.asObservable();
+  public isAuthenticatedUser(): boolean{
+    if(this.authenticatedUser){
+      return true;
+    }
+    return false;
+  }
+
+  public getAuthenticatedUser(): Observable<User>{
+    return this.applicationUser.asObservable();
   }
 
 }

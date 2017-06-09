@@ -14,8 +14,10 @@
   -->
 
 
+<!--
       <div fxLayout="column" fxLayoutAlign="space-between stretch" fxLayoutGap="16px">
-
+-->
+    <div fxLayout="column" fxLayoutAlign="start stretch">
         <!-- async pipe is added to enable implementing observable pattern in contact service -->
         <div *ngFor="let contact of contacts | async">
           <app-contact-list-item [contact]="contact"

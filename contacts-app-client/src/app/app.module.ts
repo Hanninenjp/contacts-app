@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
 import { AppComponent } from './app.component';
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {ContactService} from "./contact/services/contact.service";
@@ -22,6 +21,9 @@ import {ContactApiService} from "./contact/services/contact-api.service";
 import { VibrationDirective } from './device/directives/vibration.directive';
 import {DeviceService} from "./device/services/device.service";
 import {AuthenticationService} from "./user/services/authentication.service";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {AuthenticationGuard} from "./guard/authentication.guard";
+import {AuthModule} from "./user/modules/auth/auth.module";
 
 const appRoutes: Routes = [
   {
@@ -30,7 +32,8 @@ const appRoutes: Routes = [
   },
   {
     path: 'contacts',
-    component: ContactComponent
+    component: ContactComponent,
+    canActivate: [AuthenticationGuard]
   },
   {
     path: '',
@@ -59,7 +62,9 @@ const appRoutes: Routes = [
     HttpModule,
     FlexLayoutModule,
     MaterialModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    BrowserAnimationsModule,
+    AuthModule
   ],
   providers: [
     ContactService,
@@ -67,7 +72,8 @@ const appRoutes: Routes = [
     LocalStorageService,
     ContactApiService,
     DeviceService,
-    AuthenticationService
+    AuthenticationService,
+    AuthenticationGuard
   ],
   bootstrap: [AppComponent],
   entryComponents: [

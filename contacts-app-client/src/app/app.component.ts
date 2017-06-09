@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from "./user/services/authentication.service";
 import {Router} from "@angular/router";
+import {User} from "./user/user";
 
 @Component({
   selector: 'app-root',
@@ -9,26 +10,22 @@ import {Router} from "@angular/router";
 })
 export class AppComponent implements OnInit {
 
-  authState: boolean;
+  authenticatedUser: User;
 
   constructor(private appRouter: Router, private authentication: AuthenticationService) {
-    this.authState = false;
+    this.authenticatedUser = null;
   }
 
   onLogout(){
-    //Navigating to login will also trigger logout
-    this.authentication.logout()
-      .subscribe(result => {
-        this.appRouter.navigate(['/login']);
-    });
+    //Navigating to login will trigger logout
+    this.appRouter.navigate(['/login']);
   }
 
   ngOnInit(){
-    this.authentication.getAuthState()
-      .subscribe(state => {
-        console.log('Authentication state: ' + state);
-        this.authState = state;
-      })
+    this.authentication.getAuthenticatedUser()
+      .subscribe(user => {
+        this.authenticatedUser = user;
+      });
   }
 
 }

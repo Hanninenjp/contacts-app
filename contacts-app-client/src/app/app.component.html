@@ -4,8 +4,10 @@
 
     <div class="ca-sidenav-header" fxLayout="row" fxLayoutAlign="center center">
       <div fxLayout="column" fxLayoutAlign="center center">
+        <div style="font-size: 16px">An Angular Application Demo</div>
         <md-icon style="width: 80px; height: 80px; font-size: 80px">account_circle</md-icon>
-        <div style="font-size: 16px">Jukka Hänninen</div>
+        <!-- Alternatively, signed in user's information could be displayed here -->
+        <div style="font-size: 16px">&copy; Jukka Hänninen</div>
       </div>
     </div>
 
@@ -32,7 +34,10 @@
         <h2>Contacts App</h2>
         <!-- Add space -->
         <span style="flex: 1 1 auto"></span>
-        <span style="font-size: 12px; cursor: pointer" *ngIf="authState" (click)="onLogout()">Logout</span>
+        <button [disabled]="!authenticatedUser" md-icon-button [mdMenuTriggerFor]="userMenu">
+          <md-icon class="md-24">person</md-icon>
+        </button>
+
       </md-toolbar>
 
       <div class="ca-toolbar-placeholder-fix"></div>
@@ -42,5 +47,13 @@
     </div>
 
   </div>
+
+  <md-menu #userMenu="mdMenu" [overlapTrigger]="false">
+
+    <!-- Signed in user's display name presentation could be improved -->
+    <span md-menu-item *ngIf="authenticatedUser"><strong> {{authenticatedUser.firstName}} {{authenticatedUser.lastName}} </strong></span>
+    <button md-menu-item (click)="onLogout()"> Logout </button>
+
+  </md-menu>
 
 </md-sidenav-container>

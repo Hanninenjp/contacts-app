@@ -5,11 +5,11 @@ export class User {
   username: string;
   password: string;
 
-  constructor(){
-    this.firstName = '';
-    this.lastName = '';
-    this.username = '';
-    this.password = '';
+  constructor(firstName?, lastName?, username?, password?){
+    this.firstName = firstName || '';
+    this.lastName = lastName || '';
+    this.username = username || '';
+    this.password = password || '';
   }
 
 }
