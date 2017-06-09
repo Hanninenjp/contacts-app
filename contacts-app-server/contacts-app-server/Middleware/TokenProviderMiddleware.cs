@@ -7,7 +7,6 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using contacts_app_server.Models;
 using Microsoft.AspNetCore.Identity;
-using System.Security.Principal;
 
 namespace contacts_app_server.Middleware
 {
@@ -51,7 +50,6 @@ namespace contacts_app_server.Middleware
             var username = context.Request.Form["username"];
             var password = context.Request.Form["password"];
 
-            //var identity = await GetIdentity(username, password);
             var identity = await GetClaimsIdentity(username, password);
             if (identity == null)
             {
@@ -62,19 +60,10 @@ namespace contacts_app_server.Middleware
 
             var now = DateTime.UtcNow;
 
-            //Add the jti (random nonce), iat (issued timestamp), and sub (subject/user) claims.
-            var claims = new Claim[]
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, username),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.Iat, ((DateTimeOffset)now).ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64)
-            };
-
-            //Create the JWT and write it to a string
             var jwt = new JwtSecurityToken(
                 issuer: _options.Issuer,
                 audience: _options.Audience,
-                claims: claims,
+                claims: identity.Claims,
                 notBefore: now,
                 expires: now.Add(_options.Expiration),
                 signingCredentials: _options.SigningCredentials);
@@ -103,8 +92,16 @@ namespace contacts_app_server.Middleware
                     //Check the credentials  
                     if (await _userManager.CheckPasswordAsync(userToVerify, password))
                     {
-                        //Claims could be added
-                        return await Task.FromResult(new ClaimsIdentity(new GenericIdentity(username, "Token"), new Claim[] { }));
+                        var now = DateTime.UtcNow;
+                        //Add the jti (random nonce), iat (issued timestamp), and sub (subject/user) claims,
+                        //additionally include user's given name and family name
+                        return await Task.FromResult(new ClaimsIdentity(new Claim[] {
+                            new Claim(JwtRegisteredClaimNames.Sub, username),
+                            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                            new Claim(JwtRegisteredClaimNames.Iat, ((DateTimeOffset)now).ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64),
+                            new Claim(JwtRegisteredClaimNames.GivenName, userToVerify.firstName),
+                            new Claim(JwtRegisteredClaimNames.FamilyName, userToVerify.lastName)
+                        }));
                     }
                 }
             }
@@ -112,21 +109,6 @@ namespace contacts_app_server.Middleware
             // Credentials are invalid, or account doesn't exist
             return await Task.FromResult<ClaimsIdentity>(null);
         }
-
-        //For development time testing
-        /*
-        private Task<ClaimsIdentity> GetIdentity(string username, string password)
-        {
-            // DON'T do this in production, obviously!
-            if (username == "TEST" && password == "TEST")
-            {
-                return Task.FromResult(new ClaimsIdentity(new GenericIdentity(username, "Token"), new Claim[] { }));
-            }
-
-            // Credentials are invalid, or account doesn't exist
-            return Task.FromResult<ClaimsIdentity>(null);
-        }
-        */
 
     }
 }

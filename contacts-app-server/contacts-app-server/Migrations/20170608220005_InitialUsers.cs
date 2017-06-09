@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace contactsappserver.Migrations
 {
-    public partial class initial : Migration
+    public partial class InitialUsers : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -47,11 +47,11 @@ namespace contacts_app_server
 
             //Contacts
             services.AddDbContext<ContactsContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("ContactsAppRepository")));
 
             //Identity
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("ContactsAppRepository")));
 
             // Cors, see https://docs.microsoft.com/en-us/aspnet/core/security/cors
             // Add Cors and create Policy with options
@@ -151,7 +151,8 @@ namespace contacts_app_server
             app.UseMvc();
 
             //Contacts repository
-            DbInitializer.Initialize(context);
+            //For development time initialization
+            //DbInitializer.Initialize(context);
         }
     }
 }

@@ -8,8 +8,8 @@ using contacts_app_server.Data;
 namespace contactsappserver.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170522091733_initial")]
-    partial class initial
+    [Migration("20170608220005_InitialUsers")]
+    partial class InitialUsers
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
